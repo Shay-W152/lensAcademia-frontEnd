@@ -1,4 +1,3 @@
-// src/components/ResearchPapers.js
 import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 
@@ -6,11 +5,25 @@ const ResearchPapers = () => {
   const [papers, setPapers] = useState([]);
 
   useEffect(() => {
-    // Fetch data from your API endpoint: http://127.0.0.1:8000/api/researchpapers/
     fetch('http://127.0.0.1:8000/api/researchpapers/')
       .then((response) => response.json())
-      .then((data) => setPapers(data));
+      .then((data) => {
+        const sortedPapers = data.sort((a, b) => a.name.localeCompare(b.name));
+        setPapers(sortedPapers);
+      });
   }, []);
+
+  const clickableCellStyle = {
+    cursor: 'pointer',
+    padding: '8px',
+    /* Add other styles as needed */
+  };
+
+  const linkStyle = {
+    color: 'inherit',       
+    textDecoration: 'none',  
+    
+  };
 
   return (
     <div>
@@ -18,21 +31,27 @@ const ResearchPapers = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>ID</th>
             <th>Title</th>
             <th>Abstract</th>
-            <th>URL</th>
             <th>Country</th>
           </tr>
         </thead>
         <tbody>
           {papers.map((paper) => (
             <tr key={paper.id}>
-              <td>{paper.id}</td>
-              <td>{paper.name}</td>
-              <td>{paper.abstract}</td>
-              <td>{paper.url}</td>
-              <td>{paper.country}</td>
+              <td>
+                <a href={paper.url} target="_blank" rel="noopener noreferrer" style={linkStyle}>
+                  <div style={clickableCellStyle}>{paper.name}</div>
+                </a>
+              </td>
+              <td>
+                <a href={paper.url} target="_blank" rel="noopener noreferrer" style={linkStyle}>
+                  <div style={clickableCellStyle}>{paper.abstract}</div>
+                </a>
+              </td>
+              <td>
+                {paper.country}
+              </td>
             </tr>
           ))}
         </tbody>

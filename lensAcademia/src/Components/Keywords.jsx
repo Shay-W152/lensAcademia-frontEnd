@@ -6,7 +6,7 @@ const Keywords = () => {
   const [keywords, setKeywords] = useState([]);
 
   useEffect(() => {
-    // Fetch data from your API endpoint: http://127.0.0.1:8000/api/keywords/
+    
     fetch('http://127.0.0.1:8000/api/keywords/')
       .then((response) => response.json())
       .then((data) => setKeywords(data));
