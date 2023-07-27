@@ -22,7 +22,6 @@ const ResearchPapers = () => {
   const linkStyle = {
     color: 'inherit',       
     textDecoration: 'none',  
-    
   };
 
   return (
@@ -34,6 +33,7 @@ const ResearchPapers = () => {
             <th>Title</th>
             <th>Abstract</th>
             <th>Country</th>
+            <th>Keywords</th>
           </tr>
         </thead>
         <tbody>
@@ -49,8 +49,11 @@ const ResearchPapers = () => {
                   <div style={clickableCellStyle}>{paper.abstract}</div>
                 </a>
               </td>
+              <td>{paper.country}</td>
               <td>
-                {paper.country}
+                {paper.keywords.map((keyword) => (
+                  <span key={keyword.id}>{keyword.word}, </span>
+                ))}
               </td>
             </tr>
           ))}

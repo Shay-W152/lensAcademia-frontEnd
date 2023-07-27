@@ -6,7 +6,7 @@ const TGs = () => {
   const [tgs, setTGs] = useState([]);
 
   useEffect(() => {
-    // Fetch data from your API endpoint: http://127.0.0.1:8000/api/tgs/
+   
     fetch('http://127.0.0.1:8000/api/tgs/')
       .then((response) => response.json())
       .then((data) => setTGs(data));
@@ -14,18 +14,18 @@ const TGs = () => {
 
   return (
     <div>
-      <h2>TGs</h2>
+      <h2>Topic Groups</h2>
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>TG</th>
+             
+            <th>Choose a Subject to explore</th>
           </tr>
         </thead>
         <tbody>
           {tgs.map((tg) => (
             <tr key={tg.id}>
-              <td>{tg.id}</td>
+               
               <td>{tg.tg}</td>
             </tr>
           ))}
