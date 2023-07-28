@@ -20,9 +20,15 @@ const ResearchPapersByKeyword = () => {
     if (keywordId) {
       const keywordData = keywords.find((kw) => kw.id === Number(keywordId));
       if (keywordData && keywordData.research_papers.length > 0) {
-        fetch(`http://127.0.0.1:8000/api/researchpapers/?id__in=${keywordData.research_papers.join(',')}`)
+        fetch(`http://127.0.0.1:8000/api/researchpapers/`)
           .then((response) => response.json())
-          .then((papersData) => setPapers(papersData))
+          .then((data) => {
+            // Filter the research papers that belong to the keyword
+            const matchedPapers = data.filter((paper) => {
+              return keywordData.research_papers.includes(paper.id);
+            });
+            setPapers(matchedPapers);
+          })
           .catch((error) => {
             console.error('Error fetching research papers:', error);
           });
@@ -76,7 +82,7 @@ const ResearchPapersByKeyword = () => {
               </tbody>
             </Table>
           ) : (
-            <p>Loading...</p>
+            <p>No research papers found for this keyword.</p>
           )}
         </>
       ) : (
