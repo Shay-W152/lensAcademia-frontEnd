@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 import '/Users/shay/Desktop/capStone/lensAcademia-frontEnd/lensAcademia/src/App.css';
-
+import Transitions2 from './Transitions2';
 const ResearchPapers = () => {
   const [papers, setPapers] = useState([]);
 
@@ -34,6 +34,7 @@ const ResearchPapers = () => {
   };
 
   return (
+    <Transitions2>
     <div>
       <h2 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '20px', color: '#CFCBC9' }}>
         Research Papers
@@ -69,6 +70,7 @@ const ResearchPapers = () => {
         </tbody>
       </Table>
     </div>
+    </Transitions2>
   );
 };
 

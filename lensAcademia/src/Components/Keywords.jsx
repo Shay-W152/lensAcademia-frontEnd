@@ -20,10 +20,10 @@ const Keywords = () => {
 
   const keywordStyle = {
     textDecoration: 'none',
-    color: '#007bff',
+     
     fontWeight: 'bold',
     color: 'inherit',       
-    textDecoration: 'none',  
+     
     
   };
 

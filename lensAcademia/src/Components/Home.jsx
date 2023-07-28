@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Carousel } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faNewspaper, faUser, faTags, faRectangleList } from '@fortawesome/free-solid-svg-icons';
+import { Carousel, Form, Table } from 'react-bootstrap';
+import Transitions from './Transition';
 
 const Home = () => {
   const containerStyle = {
@@ -46,6 +45,7 @@ const Home = () => {
   };
 
   const [researchPapers, setResearchPapers] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetch('http://127.0.0.1:8000/api/researchpapers/')
@@ -59,6 +59,20 @@ const Home = () => {
   const handleReadMoreClick = (url) => {
     window.open(url, '_blank');
   };
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredPapers = researchPapers.filter((paper) => {
+    const keywords = paper.keywords.map((keyword) => keyword.word.toLowerCase());
+    return (
+      paper.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      paper.abstract.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      paper.country.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      keywords.includes(searchQuery.toLowerCase())
+    );
+  });
 
   const carouselRef = useRef();
 
@@ -80,45 +94,79 @@ const Home = () => {
     };
   }, []);
 
+  const hasFilteredPapers = filteredPapers.length > 0;
+  const showTable = searchQuery !== '' && hasFilteredPapers;
+
   return (
-    <div style={containerStyle}>
-      <div className="carousel-container">
-        <Carousel
-          ref={carouselRef}
-          interval={null}
-          indicators={false}
-          prevIcon={<span className="carousel-arrow">‹</span>}
-          nextIcon={<span className="carousel-arrow">›</span>}
-          className="carousel"
-        >
-          {researchPapers.map((paper) => (
-            <Carousel.Item key={paper.id} style={carouselItemStyle}>
-              <div style={contentStyle}>
-                <h3>{paper.name}</h3>
-                <p className="carousel-abstract">{paper.abstract}</p>
-                {paper.abstract.length > 100 && (
-                  <span
-                    style={{ textDecoration: 'underline', cursor: 'pointer' }}
-                    onClick={() => handleReadMoreClick(paper.url)}
-                  >
-                    Read More
-                  </span>
-                )}
-              </div>
-            </Carousel.Item>
-          ))}
-        </Carousel>
+    <Transitions>
+      <div style={containerStyle}>
+        <div className="carousel-container">
+          <Carousel
+            ref={carouselRef}
+            interval={null}
+            indicators={false}
+            prevIcon={<span className="carousel-arrow">‹</span>}
+            nextIcon={<span className="carousel-arrow">›</span>}
+            className="carousel"
+          >
+            {researchPapers.map((paper) => (
+              <Carousel.Item key={paper.id} style={carouselItemStyle}>
+                <div style={contentStyle}>
+                  <h3>{paper.name}</h3>
+                  <p className="carousel-abstract">{paper.abstract}</p>
+                  {paper.abstract.length > 100 && (
+                    <span
+                      style={{ textDecoration: 'underline', cursor: 'pointer' }}
+                      onClick={() => handleReadMoreClick(paper.url)}
+                    >
+                      Read More
+                    </span>
+                  )}
+                </div>
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        </div>
+        <div>
+          <h2 style={headingStyle}>Welcome to LensAcademia!</h2>
+          <p style={leadStyle}>
+            LensAcademia is a platform that provides access to academic research papers, authors, and keywords.
+          </p>
+          <p style={paragraphStyle}>
+            Use the navigation links at the top to explore the content.
+          </p>
+        </div>
+        <Form style={{ marginBottom: '20px' }}>
+          <Form.Control
+            type="text"
+            placeholder="Search"
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
+        </Form>
+
+        {showTable && (
+          <Table striped bordered hover responsive>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Abstract</th>
+                <th>Country</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredPapers.map((paper) => (
+                <tr key={paper.id}>
+                  <td>{paper.name}</td>
+                  <td>{paper.abstract}</td>
+                  <td>{paper.country}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
       </div>
-      <div>
-        <h2 style={headingStyle}>Welcome to LensAcademia!</h2>
-        <p style={leadStyle}>
-          LensAcademia is a platform that provides access to academic research papers, authors, and keywords.
-        </p>
-        <p style={paragraphStyle}>
-          Use the navigation links at the top to explore the content.
-        </p>
-      </div>
-    </div>
+    </Transitions>
   );
 };
 
