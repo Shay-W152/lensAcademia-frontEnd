@@ -17,6 +17,7 @@ const ResearchPapers = () => {
     cursor: 'pointer',
     padding: '8px',
     /* Add other styles as needed */
+    
   };
 
   const linkStyle = {

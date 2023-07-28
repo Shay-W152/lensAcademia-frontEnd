@@ -15,6 +15,7 @@ const Keywords = () => {
     width: '80%',
     margin: 'auto',
     marginTop: '20px',
+    
   };
 
   const keywordStyle = {
@@ -23,6 +24,7 @@ const Keywords = () => {
     fontWeight: 'bold',
     color: 'inherit',       
     textDecoration: 'none',  
+    
   };
 
   return (
