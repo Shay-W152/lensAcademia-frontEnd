@@ -24,7 +24,7 @@ const ResearchPapersByTopicGroup = () => {
   const clickableCellStyle = {
     cursor: 'pointer',
     padding: '8px',
-    /* Add other styles as needed */
+
   };
 
   const linkStyle = {
@@ -65,14 +65,14 @@ const ResearchPapersByTopicGroup = () => {
               </tbody>
             </Table>
           ) : (
-            <p>No research papers found for this topic group.</p>
+            <p>Loading..</p>
           )}
         </>
       ) : (
         <>
           <p>Topic Group ID not specified.</p>
           <p>Click on a topic group below to view its research papers:</p>
-          {/* Your topic groups list component goes here */}
+           
         </>
       )}
     </div>

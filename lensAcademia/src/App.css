@@ -3,6 +3,43 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background-color: #A6A0A0;
+  background-color: #1E1E3A;
   font-family: 'Prata', serif;
+  
 }
+
+ 
+.carousel-container {
+  width: 100%; /* Make the carousel 100% wide */
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.carousel {
+  width: 100%; /* Make the carousel 100% wide */
+  padding: 0;
+}
+
+
+.carousel-arrow {
+  color: #fff; 
+  font-size: 60px;  
+  cursor: pointer;
+  
+}
+
+ 
+.carousel-indicators {
+  display: none;
+}
+
+.carousel-abstract {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;  
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 10px;
+}
+

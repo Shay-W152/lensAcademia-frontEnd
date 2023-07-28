@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import '/Users/shay/Desktop/capStone/lensAcademia-frontEnd/lensAcademia/src/app.css';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import React, { useState, useEffect, useRef } from 'react';
+import { Carousel } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faNewspaper, faUser, faTags, faRectangleList } from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
   const containerStyle = {
@@ -10,21 +10,19 @@ const Home = () => {
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: '100%',
-    
-    margin: '0 auto', // Center the content horizontally
+    color: '#CFCBC9',
+    margin: '0 auto',
+    fontFamily: 'Prata',
   };
-  
 
   const contentStyle = {
     maxWidth: '600px',
     margin: '0 auto',
-    padding: '20px',
-    border: '1px solid #ccc',
-    borderRadius: '8px',
-    backgroundColor: ' #A6A0A0',
-    boxShadow: '0 4px 4px rgba(207, 203, 201)',
+    padding: '50px',
+    backgroundColor: '#A6A0A0',
+    color: '#1E1E3A',
+    boxShadow: '0 10px 10px black',
   };
-  
 
   const headingStyle = {
     fontSize: '24px',
@@ -41,26 +39,10 @@ const Home = () => {
     fontSize: '16px',
   };
 
-  const carouselStyle = {
-   
-  
-  };
-
   const carouselItemStyle = {
-    height: '100%', // Set a fixed height for each carousel item
-  };
-
-  const carouselTextWrapper = {
-    textAlign: 'center',
-    maxWidth: '500px',
-    margin: '0 auto',
-  };
-
-  const readMoreStyle = {
-    
-    textDecoration: 'underline',
-    cursor: 'pointer',
-    color:'inherit'
+    overflow: 'hidden',
+    backgroundColor: 'rgba(65, 60, 58, 0.8)',
+    backdropFilter: 'blur(8px)',
   };
 
   const [researchPapers, setResearchPapers] = useState([]);
@@ -78,31 +60,56 @@ const Home = () => {
     window.open(url, '_blank');
   };
 
+  const carouselRef = useRef();
+
+  const handleKeyboardNavigation = (event) => {
+    if (event.keyCode === 37) {
+      // Left arrow key
+      carouselRef.current.prev();
+    } else if (event.keyCode === 39) {
+      // Right arrow key
+      carouselRef.current.next();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyboardNavigation);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyboardNavigation);
+    };
+  }, []);
+
   return (
     <div style={containerStyle}>
-      <Carousel
-        showThumbs={false}
-        autoPlay
-        infiniteLoop
-        interval={3000}
-        showArrows={true} // Enable left and right navigation arrows
-        style={carouselStyle}
-      >
-        {researchPapers.map((paper) => (
-          <div key={paper.id} style={carouselItemStyle}>
-            <div style={carouselTextWrapper}>
-              <h3>{paper.name}</h3>
-              <p>{paper.abstract}</p>
-              {paper.abstract.length > 100 && (
-                <span style={readMoreStyle} onClick={() => handleReadMoreClick(paper.url)}>
-                  Read More
-                </span>
-              )}
-            </div>
-          </div>
-        ))}
-      </Carousel>
-      <div style={contentStyle}>
+      <div className="carousel-container">
+        <Carousel
+          ref={carouselRef}
+          interval={null}
+          indicators={false}
+          prevIcon={<span className="carousel-arrow">‹</span>}
+          nextIcon={<span className="carousel-arrow">›</span>}
+          className="carousel"
+        >
+          {researchPapers.map((paper) => (
+            <Carousel.Item key={paper.id} style={carouselItemStyle}>
+              <div style={contentStyle}>
+                <h3>{paper.name}</h3>
+                <p className="carousel-abstract">{paper.abstract}</p>
+                {paper.abstract.length > 100 && (
+                  <span
+                    style={{ textDecoration: 'underline', cursor: 'pointer' }}
+                    onClick={() => handleReadMoreClick(paper.url)}
+                  >
+                    Read More
+                  </span>
+                )}
+              </div>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      </div>
+      <div>
         <h2 style={headingStyle}>Welcome to LensAcademia!</h2>
         <p style={leadStyle}>
           LensAcademia is a platform that provides access to academic research papers, authors, and keywords.

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
+import '/Users/shay/Desktop/capStone/lensAcademia-frontEnd/lensAcademia/src/App.css';
 
 const ResearchPapers = () => {
   const [papers, setPapers] = useState([]);
@@ -15,31 +16,31 @@ const ResearchPapers = () => {
 
   const clickableCellStyle = {
     cursor: 'pointer',
-    padding: '8px',
-    /* Add other styles as needed */
     
+    // backgroundColor:'red'
   };
 
   const linkStyle = {
-    color: 'inherit',       
-    textDecoration: 'none',  
+    color: 'inherit',
+    textDecoration: 'none',
   };
 
   return (
     <div>
-      <h2>Research Papers</h2>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Abstract</th>
-            <th>Country</th>
-            <th>Keywords</th>
-          </tr>
+      <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Research Papers</h2>
+      <Table striped bordered hover responsive style={{ marginBottom: '20px' }}>
+        <thead style={{ backgroundColor: '#CFCBC9', color: '1E1E3A' }}>
+        <tr>
+          <th style={{ backgroundColor: '#CFCBC9', color: '#1E1E3A' }}>Title</th>
+          <th style={{ backgroundColor: '#CFCBC9', color: '#1E1E3A' }}>Abstract</th>
+          <th style={{ backgroundColor: '#CFCBC9', color: '#1E1E3A' }}>Country</th>
+          <th style={{ backgroundColor: '#CFCBC9', color: '#1E1E3A' }}>Keywords</th>
+        </tr>
+
         </thead>
         <tbody>
           {papers.map((paper) => (
-            <tr key={paper.id}>
+            <tr key={paper.id} style={{ backgroundColor: '#A6A0A0', color: 'white' }}>
               <td>
                 <a href={paper.url} target="_blank" rel="noopener noreferrer" style={linkStyle}>
                   <div style={clickableCellStyle}>{paper.name}</div>
@@ -53,7 +54,7 @@ const ResearchPapers = () => {
               <td>{paper.country}</td>
               <td>
                 {paper.keywords.map((keyword) => (
-                  <span key={keyword.id}>{keyword.word}, </span>
+                  <span key={keyword.id} style={{ color: 'black' }}>{keyword.word}, </span>
                 ))}
               </td>
             </tr>

@@ -11,20 +11,48 @@ const TGs = () => {
       .then((data) => setTGs(data));
   }, []);
 
+  const tableStyle = {
+    maxWidth: '600px',
+    margin: '0 auto',
+    marginTop: '2rem',
+    backgroundColor: '#fff',
+    borderRadius: '8px',
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+  };
+
+  const thStyle = {
+    backgroundColor: '#f0f0f0',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    padding: '1rem',
+  };
+
+  const tdStyle = {
+    textAlign: 'center',
+    padding: '1rem',
+  };
+
+  const aStyle = {
+    color: 'inherit',
+    textDecoration: 'none',
+  };
+
   return (
     <div>
-      <h2>Topic Groups</h2>
-      <Table striped bordered hover>
+      <h2 style={{ textAlign: 'center', marginBottom: '1rem' }}>Topic Groups</h2>
+      <Table striped bordered hover style={tableStyle}>
         <thead>
           <tr>
-            <th>Choose a Subject to explore</th>
+            <th style={thStyle}>Choose a Subject to explore</th>
           </tr>
         </thead>
         <tbody>
           {tgs.map((tg) => (
             <tr key={tg.id}>
-              <td>
-                <Link to={`/researchpapers/tg/${tg.id}`}>{tg.tg}</Link>
+              <td style={tdStyle}>
+                <Link to={`/researchpapers/tg/${tg.id}`} style={aStyle}>
+                  {tg.tg}
+                </Link>
               </td>
             </tr>
           ))}
