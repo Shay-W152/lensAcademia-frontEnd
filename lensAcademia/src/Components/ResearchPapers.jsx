@@ -16,8 +16,6 @@ const ResearchPapers = () => {
 
   const clickableCellStyle = {
     cursor: 'pointer',
-    
-    // backgroundColor:'red'
   };
 
   const linkStyle = {
@@ -25,38 +23,47 @@ const ResearchPapers = () => {
     textDecoration: 'none',
   };
 
+  const tableHeaderStyle = {
+    backgroundColor: '#CFCBC9', 
+    color: '#1E1E3A',
+  };
+
+  const tableRowStyle = {
+    backgroundColor: '#A6A0A0',
+    color: '#1E1E3A',
+  };
+
   return (
     <div>
-      <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Research Papers</h2>
+      <h2 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '20px', color: '#CFCBC9' }}>
+        Research Papers
+      </h2>
       <Table striped bordered hover responsive style={{ marginBottom: '20px' }}>
-        <thead style={{ backgroundColor: '#CFCBC9', color: '1E1E3A' }}>
-        <tr>
-          <th style={{ backgroundColor: '#CFCBC9', color: '#1E1E3A' }}>Title</th>
-          <th style={{ backgroundColor: '#CFCBC9', color: '#1E1E3A' }}>Abstract</th>
-          <th style={{ backgroundColor: '#CFCBC9', color: '#1E1E3A' }}>Country</th>
-          <th style={{ backgroundColor: '#CFCBC9', color: '#1E1E3A' }}>Keywords</th>
-        </tr>
-
+        <thead>
+          <tr>
+            <th style={tableHeaderStyle}>Title</th>
+            <th style={tableHeaderStyle}>Abstract</th>
+            <th style={tableHeaderStyle}>Country</th>
+            {/* <th>Keywords</th> */}
+          </tr>
         </thead>
         <tbody>
           {papers.map((paper) => (
-            <tr key={paper.id} style={{ backgroundColor: '#A6A0A0', color: 'white' }}>
-              <td>
+            <tr key={paper.id}>
+              <td style={{ ...tableRowStyle, ...clickableCellStyle }}>
                 <a href={paper.url} target="_blank" rel="noopener noreferrer" style={linkStyle}>
-                  <div style={clickableCellStyle}>{paper.name}</div>
+                  {paper.name}
                 </a>
               </td>
-              <td>
-                <a href={paper.url} target="_blank" rel="noopener noreferrer" style={linkStyle}>
-                  <div style={clickableCellStyle}>{paper.abstract}</div>
-                </a>
-              </td>
-              <td>{paper.country}</td>
-              <td>
+              <td style={tableRowStyle}>{paper.abstract}</td>
+              <td style={tableRowStyle}>{paper.country}</td>
+              {/* <td>
                 {paper.keywords.map((keyword) => (
-                  <span key={keyword.id} style={{ color: 'black' }}>{keyword.word}, </span>
+                  <span key={keyword.id} style={{ color: '#000000' }}>
+                    {keyword.word}, 
+                  </span>
                 ))}
-              </td>
+              </td> */}
             </tr>
           ))}
         </tbody>

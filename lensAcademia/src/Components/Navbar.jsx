@@ -6,14 +6,14 @@ import '/Users/shay/Desktop/capStone/lensAcademia-frontEnd/lensAcademia/src/App.
 
 const CustomNavbar = () => {
   const navbarStyle = {
-    backgroundColor: '#A6A0A0', // Background color of the navbar
-    color: '#fff', // Text color
-    fontWeight: 'bold', // Font weight of the text
+    backgroundColor: '#A6A0A0',  
+    color: '#fff', 
+    fontWeight: 'bold',  
   };
 
   const navLinkStyle = {
-    color: '#fff', // Text color of the navigation links
-    marginRight: '10px', // Spacing between the navigation links
+    color: '#fff', 
+    marginRight: '10px',  
   };
 
   return (
