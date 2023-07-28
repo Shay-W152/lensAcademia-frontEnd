@@ -2,35 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 
-const ResearchPapersByKeyword = () => {
-  const { keywordId } = useParams();
-  const [keywords, setKeywords] = useState([]);
+const ResearchPapersByTopicGroup = () => {
+  const { topicGroupId } = useParams();
   const [papers, setPapers] = useState([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/keywords/')
+    fetch('http://127.0.0.1:8000/api/researchpapers/')
       .then((response) => response.json())
-      .then((data) => setKeywords(data))
+      .then((data) => {
+        // Filter the research papers that belong to the topic group
+        const matchedPapers = data.filter((paper) => {
+          return paper.tg === `http://127.0.0.1:8000/api/tgs/${topicGroupId}/`;
+        });
+        setPapers(matchedPapers);
+      })
       .catch((error) => {
-        console.error('Error fetching keywords:', error);
+        console.error('Error fetching research papers:', error);
       });
-  }, []);
-
-  useEffect(() => {
-    if (keywordId) {
-      const keywordData = keywords.find((kw) => kw.id === Number(keywordId));
-      if (keywordData && keywordData.research_papers.length > 0) {
-        fetch(`http://127.0.0.1:8000/api/researchpapers/?id__in=${keywordData.research_papers.join(',')}`)
-          .then((response) => response.json())
-          .then((papersData) => setPapers(papersData))
-          .catch((error) => {
-            console.error('Error fetching research papers:', error);
-          });
-      } else {
-        setPapers([]);
-      }
-    }
-  }, [keywordId, keywords]);
+  }, [topicGroupId]);
 
   const clickableCellStyle = {
     cursor: 'pointer',
@@ -45,9 +34,9 @@ const ResearchPapersByKeyword = () => {
 
   return (
     <div>
-      {keywordId ? (
+      {topicGroupId ? (
         <>
-          <h2>Research Papers for Keyword ID: {keywordId}</h2>
+          <h2>Research Papers for Topic Group ID: {topicGroupId}</h2>
           {papers.length > 0 ? (
             <Table striped bordered hover>
               <thead>
@@ -76,24 +65,18 @@ const ResearchPapersByKeyword = () => {
               </tbody>
             </Table>
           ) : (
-            <p>Loading...</p>
+            <p>No research papers found for this topic group.</p>
           )}
         </>
       ) : (
         <>
-          <p>Keyword ID not specified.</p>
-          <p>Click on a keyword below to view its research papers:</p>
-          <ul>
-            {keywords.map((kw) => (
-              <li key={kw.id}>
-                <Link to={`/researchpapers/keyword/${kw.id}`}>{kw.word}</Link>
-              </li>
-            ))}
-          </ul>
+          <p>Topic Group ID not specified.</p>
+          <p>Click on a topic group below to view its research papers:</p>
+          {/* Your topic groups list component goes here */}
         </>
       )}
     </div>
   );
 };
 
-export default ResearchPapersByKeyword;
+export default ResearchPapersByTopicGroup;

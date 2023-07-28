@@ -11,10 +11,24 @@ const Keywords = () => {
       .then((data) => setKeywords(data));
   }, []);
 
+  const tableStyle = {
+    width: '80%',
+    margin: 'auto',
+    marginTop: '20px',
+  };
+
+  const keywordStyle = {
+    textDecoration: 'none',
+    color: '#007bff',
+    fontWeight: 'bold',
+    color: 'inherit',       
+    textDecoration: 'none',  
+  };
+
   return (
-    <div>
+    <div style={tableStyle}>
       <h2>Keywords</h2>
-      <Table striped bordered hover>
+      <Table striped bordered hover responsive>
         <thead>
           <tr>
             <th>Keywords</th>
@@ -24,7 +38,9 @@ const Keywords = () => {
           {keywords.map((keyword) => (
             <tr key={keyword.id}>
               <td>
-                <Link to={`/researchpapers/keyword/${keyword.id}`}>{keyword.word}</Link>
+                <Link to={`/researchpapers/keyword/${keyword.id}`} style={keywordStyle}>
+                  {keyword.word}
+                </Link>
               </td>
             </tr>
           ))}

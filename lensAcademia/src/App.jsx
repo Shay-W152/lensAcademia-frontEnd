@@ -4,6 +4,7 @@ import CustomNavbar from './Components/Navbar';
 import Home from './Components/Home';
 import Keywords from './Components/Keywords';
 import TGs from './Components/TGs';
+import ResearchPapersByTopicGroup from './Components/ResearchPapersByTopicGroup';
 import Authors from './Components/Authors';
 import ResearchPapers from './Components/ResearchPapers';
 import ResearchPapersByKeyword from './Components/ResearchPapersByKeyword';
@@ -20,6 +21,7 @@ function App() {
           <Route path="/authors" element={<Authors />} />
           <Route path="/researchpapers" element={<ResearchPapers />} />
           <Route path="/researchpapers/keyword/:keywordId" element={<ResearchPapersByKeyword />} />
+          <Route path="/researchpapers/tg/:topicGroupId" element={<ResearchPapersByTopicGroup />} />
         </Routes>
       </div>
     </Router>
