@@ -8,6 +8,7 @@ import ResearchPapersByTopicGroup from './Components/ResearchPapersByTopicGroup'
 import Authors from './Components/Authors';
 import ResearchPapers from './Components/ResearchPapers';
 import ResearchPapersByKeyword from './Components/ResearchPapersByKeyword';
+import PostResearchPaper from './Components/PostResearchPaper';  
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/researchpapers" element={<ResearchPapers />} />
           <Route path="/researchpapers/keyword/:keywordId" element={<ResearchPapersByKeyword />} />
           <Route path="/researchpapers/tg/:topicGroupId" element={<ResearchPapersByTopicGroup />} />
+          <Route path="/postresearchpaper" element={<PostResearchPaper />} />  
         </Routes>
       </div>
     </Router>

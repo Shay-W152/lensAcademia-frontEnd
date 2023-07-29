@@ -1,19 +1,19 @@
 import React from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faNewspaper, faUser, faTags, faRectangleList } from '@fortawesome/free-solid-svg-icons';
-import '/Users/shay/Desktop/capStone/lensAcademia-frontEnd/lensAcademia/src/App.css'
+import { faNewspaper, faUser, faTags, faRectangleList, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import '/Users/shay/Desktop/capStone/lensAcademia-frontEnd/lensAcademia/src/App.css';
 
 const CustomNavbar = () => {
   const navbarStyle = {
-    backgroundColor: '#A6A0A0',  
-    color: '#fff', 
-    fontWeight: 'bold',  
+    backgroundColor: '#A6A0A0',
+    color: '#fff',
+    fontWeight: 'bold',
   };
 
   const navLinkStyle = {
-    color: '#fff', 
-    marginRight: '10px',  
+    color: '#fff',
+    marginRight: '10px',
   };
 
   return (
@@ -34,6 +34,9 @@ const CustomNavbar = () => {
             </Nav.Link>
             <Nav.Link href="/tgs" style={navLinkStyle}>
               <FontAwesomeIcon icon={faRectangleList} /> Topic Groups
+            </Nav.Link>
+            <Nav.Link href="/addresearchpaper" style={navLinkStyle}>
+              <FontAwesomeIcon icon={faPlusSquare} /> Add Research Paper 
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
