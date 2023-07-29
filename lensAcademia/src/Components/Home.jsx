@@ -12,10 +12,11 @@ const Home = () => {
     color: '#CFCBC9',
     margin: '0 auto',
     fontFamily: 'Prata',
+    
   };
 
   const contentStyle = {
-    maxWidth: '600px',
+    maxWidth: '800px',
     margin: '0 auto',
     padding: '50px',
     backgroundColor: '#A6A0A0',
@@ -32,16 +33,43 @@ const Home = () => {
 
   const leadStyle = {
     fontSize: '18px',
+    lineHeight: '1.6',
+    marginBottom: '20px',
+    paddingLeft: '4rem',
+    paddingRight: '4rem',
   };
 
   const paragraphStyle = {
-    fontSize: '16px',
+    fontSize: '18px',
+    lineHeight: '1.5',
+    marginBottom: '10px',
+    paddingLeft: '4rem',
+    paddingRight: '4rem',
+  };
+
+  const tableStyle = {
+    width: '100%',
+    marginTop: '20px',
+    textDecoration:'none'
+  };
+  const thStyle = {
+    backgroundColor: '#A6A0A0',
+    textDecoration: 'none',
+  };
+
+
+  const tableRowStyle = {
+    fontSize: '14x',
+    textDecoration: 'none',
+    
+
   };
 
   const carouselItemStyle = {
     overflow: 'hidden',
     backgroundColor: 'rgba(65, 60, 58, 0.8)',
     backdropFilter: 'blur(8px)',
+    
   };
 
   const [researchPapers, setResearchPapers] = useState([]);
@@ -78,10 +106,8 @@ const Home = () => {
 
   const handleKeyboardNavigation = (event) => {
     if (event.keyCode === 37) {
-      // Left arrow key
       carouselRef.current.prev();
     } else if (event.keyCode === 39) {
-      // Right arrow key
       carouselRef.current.next();
     }
   };
@@ -100,7 +126,7 @@ const Home = () => {
   return (
     <Transitions>
       <div style={containerStyle}>
-        <div className="carousel-container">
+        <div className="carousel-container" style={{ height: '400px' }}>
           <Carousel
             ref={carouselRef}
             interval={null}
@@ -130,12 +156,15 @@ const Home = () => {
         <div>
           <h2 style={headingStyle}>Welcome to LensAcademia!</h2>
           <p style={leadStyle}>
-            LensAcademia is a platform that provides access to academic research papers, authors, and keywords.
+            LensAcademia is a platform that provides access to academic research papers, and authors. It is designed to be a comprehensive resource for researchers, students, and anyone interested in exploring scholarly articles from various disciplines.
+            Our vast database includes a wide range of research papers on subjects such as physics, chemistry, biology, mathematics, literature, history, and more.
           </p>
           <p style={paragraphStyle}>
-            Use the navigation links at the top to explore the content.
+            To get started, use the search bar below to find research papers related to your area of interest. You can search by paper title, author name, country of origin, or keywords associated with the paper. Our advanced search capabilities make it easy to discover relevant academic content quickly.
+            Start your journey with LensAcademia today and unlock a world of academic insights at your fingertips!
           </p>
         </div>
+
         <Form style={{ marginBottom: '20px' }}>
           <Form.Control
             type="text"
@@ -146,26 +175,56 @@ const Home = () => {
         </Form>
 
         {showTable && (
-          <Table striped bordered hover responsive>
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Abstract</th>
-                <th>Country</th>
+        <Table striped bordered hover responsive style={tableStyle}>
+          <thead>
+            <tr>
+              <th style={{ ...thStyle, backgroundColor: '#A6A0A0' }}>Title</th>
+              <th style={{ ...thStyle, backgroundColor: '#A6A0A0' }}>Abstract</th>
+              <th style={{ ...thStyle, backgroundColor: '#A6A0A0' }}>Country</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredPapers.map((paper) => (
+              <tr key={paper.id} style={tableRowStyle}>
+                <td style={{ backgroundColor: '#CFCBC9' }}>
+                  <a
+                    href={paper.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: 'none', color: '#141B41' }}
+                  >
+                    {paper.name}
+                  </a>
+                </td>
+                <td style={{ backgroundColor: '#CFCBC9' }}>
+                  <a
+                    href={paper.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: 'none', color: '#141B41' }}
+                  >
+                    {paper.abstract}
+                  </a>
+                </td>
+                <td style={{ backgroundColor: '#CFCBC9' }}>
+                  <a
+                    href={paper.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: 'none', color: '#141B41' }}
+                  >
+                    {paper.country}
+                  </a>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {filteredPapers.map((paper) => (
-                <tr key={paper.id}>
-                  <td>{paper.name}</td>
-                  <td>{paper.abstract}</td>
-                  <td>{paper.country}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        )}
-      </div>
+            ))}
+          </tbody>
+        </Table>
+
+
+
+    )}
+    </div>
     </Transitions>
   );
 };

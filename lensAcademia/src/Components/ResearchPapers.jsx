@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 import '/Users/shay/Desktop/capStone/lensAcademia-frontEnd/lensAcademia/src/App.css';
 import Transitions2 from './Transitions2';
+
 const ResearchPapers = () => {
   const [papers, setPapers] = useState([]);
 
@@ -24,7 +25,7 @@ const ResearchPapers = () => {
   };
 
   const tableHeaderStyle = {
-    backgroundColor: '#CFCBC9', 
+    backgroundColor: '#CFCBC9',
     color: '#1E1E3A',
   };
 
@@ -35,41 +36,49 @@ const ResearchPapers = () => {
 
   return (
     <Transitions2>
-    <div>
-      <h2 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '20px', color: '#CFCBC9' }}>
-        Research Papers
-      </h2>
-      <Table striped bordered hover responsive style={{ marginBottom: '20px' }}>
-        <thead>
-          <tr>
-            <th style={tableHeaderStyle}>Title</th>
-            <th style={tableHeaderStyle}>Abstract</th>
-            <th style={tableHeaderStyle}>Country</th>
-            {/* <th>Keywords</th> */}
-          </tr>
-        </thead>
-        <tbody>
-          {papers.map((paper) => (
-            <tr key={paper.id}>
-              <td style={{ ...tableRowStyle, ...clickableCellStyle }}>
-                <a href={paper.url} target="_blank" rel="noopener noreferrer" style={linkStyle}>
-                  {paper.name}
-                </a>
-              </td>
-              <td style={tableRowStyle}>{paper.abstract}</td>
-              <td style={tableRowStyle}>{paper.country}</td>
-              {/* <td>
+      <div>
+        <h2 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '20px', color: '#CFCBC9' }}>
+          Research Papers
+        </h2>
+        <Table striped bordered hover responsive style={{ marginBottom: '20px' }}>
+          <thead>
+            <tr>
+              <th style={tableHeaderStyle}>Title</th>
+              <th style={tableHeaderStyle}>Abstract</th>
+              <th style={tableHeaderStyle}>Country</th>
+              {/* <th>Keywords</th> */}
+            </tr>
+          </thead>
+          <tbody>
+            {papers.map((paper) => (
+              <tr key={paper.id}>
+                <td style={{ ...tableRowStyle, ...clickableCellStyle }}>
+                  <a href={paper.url} target="_blank" rel="noopener noreferrer" style={linkStyle}>
+                    {paper.name}
+                  </a>
+                </td>
+                <td style={{ ...tableRowStyle, ...clickableCellStyle }}>
+                  <a href={paper.url} target="_blank" rel="noopener noreferrer" style={linkStyle}>
+                    {paper.abstract}
+                  </a>
+                </td>
+                <td style={{ ...tableRowStyle, ...clickableCellStyle }}>
+                  <a href={paper.url} target="_blank" rel="noopener noreferrer" style={linkStyle}>
+                    {paper.country}
+                  </a>
+                </td>
+                {/* <td>
                 {paper.keywords.map((keyword) => (
                   <span key={keyword.id} style={{ color: '#000000' }}>
                     {keyword.word}, 
                   </span>
                 ))}
               </td> */}
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </div>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
     </Transitions2>
   );
 };

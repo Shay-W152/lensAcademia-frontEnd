@@ -1,7 +1,7 @@
 #root {
   max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  
   text-align: center;
   background-color: #1E1E3A;
   font-family: 'Prata', serif;
@@ -10,14 +10,14 @@
 
  
 .carousel-container {
-  width: 100%; /* Make the carousel 100% wide */
+  width: 100%;  
   margin: 0;
   padding: 0;
   position: relative;
 }
 
 .carousel {
-  width: 100%; /* Make the carousel 100% wide */
+  width: 100%;  
   padding: 0;
 }
 
