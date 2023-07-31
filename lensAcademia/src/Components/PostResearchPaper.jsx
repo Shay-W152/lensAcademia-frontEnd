@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Form, Button, Container } from 'react-bootstrap';
+import Transtions2 from './Transitions2'
 
 function getCookie(name) {
   const cookieValue = document.cookie
@@ -16,11 +18,13 @@ function getCookie(name) {
 const PostResearchPaper = () => {
   const [formData, setFormData] = useState({
     name: '',
+    researchers:'',
     abstract: '',
     url: '',
     country: '',
     tg: '',
-    // Keywords: ''
+    // keywords: '',
+   
   });
 
   const handleInputChange = (e) => {
@@ -44,7 +48,7 @@ const PostResearchPaper = () => {
       )
       .then((response) => {
         alert('Research paper successfully posted!');
-        // You can perform additional actions upon successful submission
+         
       })
       .catch((error) => {
         alert('An error occurred while posting the research paper.');
@@ -53,32 +57,53 @@ const PostResearchPaper = () => {
   };
 
   return (
-    <div>
-      <h1>Post a New Research Paper</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} required /><br />
+    <Container>
+        <Transtions2>
+      <h1 style={{ color:'#A6A0A0', textAlign: 'center', marginTop:'2rem' }}>Submit a New Paper</h1>
+      <Form onSubmit={handleSubmit} style={{ color:'#A6A0A0', maxWidth: '600px', margin: '0 auto' }}>
+        <Form.Group>
+          <Form.Label>Name:</Form.Label>
+          <Form.Control type="text" name="name" value={formData.name} onChange={handleInputChange} required style={{ backgroundColor:'#A6A0A0'}}></Form.Control> 
+        </Form.Group>
 
-        <label htmlFor="abstract">Abstract:</label>
-        <textarea id="abstract" name="abstract" rows="4" cols="50" value={formData.abstract} onChange={handleInputChange} required></textarea><br />
+          <Form.Group>
+          <Form.Label>Researchers:</Form.Label>
+          <Form.Control type="text" name="researchers" value={formData.researchers} onChange={handleInputChange} required style={{ backgroundColor:'#A6A0A0'}} />
+        </Form.Group>
 
-        <label htmlFor="url">URL:</label>
-        <input type="url" id="url" name="url" value={formData.url} onChange={handleInputChange} required /><br />
+        <Form.Group>
+          <Form.Label>Abstract:</Form.Label>
+          <Form.Control as="textarea" rows="4" name="abstract" value={formData.abstract} onChange={handleInputChange} required style={{ backgroundColor:'#A6A0A0'}}/>
+        </Form.Group>
 
-        <label htmlFor="country">Country:</label>
-        <input type="text" id="country" name="country" value={formData.country} onChange={handleInputChange} required /><br />
+        <Form.Group>
+          <Form.Label>URL:</Form.Label>
+          <Form.Control type="url" name="url" value={formData.url} onChange={handleInputChange} required style={{ backgroundColor:'#A6A0A0'}}/>
+        </Form.Group>
 
-        <label htmlFor="tg">Topic Group:</label>
-        <input type="text" id="tg" name="tg" value={formData.tg} onChange={handleInputChange} required /><br />
+        <Form.Group>
+          <Form.Label>Country:</Form.Label>
+          <Form.Control type="text" name="country" value={formData.country} onChange={handleInputChange} required style={{ backgroundColor:'#A6A0A0'}}/>
+        </Form.Group>
 
-        {/* <label htmlFor="keywords">Keywords:</label>
-        <input type="text" id="keywords" name="keywords" value={formData.keywords} onChange={handleInputChange} required /><br /> */}
+        <Form.Group>
+          <Form.Label>Topic Group:</Form.Label>
+          <Form.Control type="text" name="tg" value={formData.tg} onChange={handleInputChange} required style={{ backgroundColor:'#A6A0A0'}}/>
+        </Form.Group>
 
-        
+        {/* <Form.Group>
+          <Form.Label>Keywords:</Form.Label>
+          <Form.Control type="text" name="keywords" value={formData.keywords} onChange={handleInputChange} required />
+        </Form.Group> */}
 
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+      
+
+        <div style={{ textAlign: 'center' }}>
+          <Button type="submit" style={{ padding: '10px 20px', fontSize: '16px', backgroundColor: '#A6A0A0', color: 'white', border: 'none', marginTop:'1rem', borderRadius: '4px', cursor: 'pointer' }}>Submit</Button>
+        </div>
+      </Form>
+      </Transtions2>
+    </Container>
   );
 };
 

@@ -7,13 +7,6 @@ import '/Users/shay/Desktop/capStone/lensAcademia-frontEnd/lensAcademia/src/App.
 const CustomNavbar = () => {
   const navbarStyle = {
     backgroundColor: '#A6A0A0',
-    color: '#fff',
-    fontWeight: 'bold',
-  };
-
-  const navLinkStyle = {
-    color: '#fff',
-    marginRight: '10px',
   };
 
   return (
@@ -23,19 +16,20 @@ const CustomNavbar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/researchpapers" style={navLinkStyle}>
+             
+            <Nav.Link href="/researchpapers" className="navbar-links">
               <FontAwesomeIcon icon={faNewspaper} /> Research Papers
             </Nav.Link>
-            <Nav.Link href="/authors" style={navLinkStyle}>
+            <Nav.Link href="/authors" className="navbar-links">
               <FontAwesomeIcon icon={faUser} /> Authors
             </Nav.Link>
-            <Nav.Link href="/keywords" style={navLinkStyle}>
+            <Nav.Link href="/keywords" className="navbar-links">
               <FontAwesomeIcon icon={faTags} /> Keywords
             </Nav.Link>
-            <Nav.Link href="/tgs" style={navLinkStyle}>
+            <Nav.Link href="/tgs" className="navbar-links">
               <FontAwesomeIcon icon={faRectangleList} /> Topic Groups
             </Nav.Link>
-            <Nav.Link href="/addresearchpaper" style={navLinkStyle}>
+            <Nav.Link href="/postresearchpaper" className="navbar-links">
               <FontAwesomeIcon icon={faPlusSquare} /> Add Research Paper 
             </Nav.Link>
           </Nav>
