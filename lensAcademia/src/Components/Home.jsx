@@ -8,34 +8,35 @@ const Home = () => {
   const [filteredPapers, setFilteredPapers] = useState([]);
 
   useEffect(() => {
-    // Fetch the research papers from the API (adjust the URL as needed)
     fetch('http://127.0.0.1:8000/api/researchpapers/')
       .then((response) => response.json())
       .then((data) => {
         setResearchPapers(data);
-        setFilteredPapers(data);
       })
       .catch((error) => console.error('Error fetching research papers:', error));
   }, []);
 
+  // Function to handle search query changes
   const handleSearchChange = (event) => {
-    const query = event.target.value.toLowerCase();
-    setSearchQuery(query);
-
-    const filtered = researchPapers.filter((paper) => {
-      const keywords = paper.keywords.map((keyword) => keyword.word.toLowerCase());
-      const authors = paper.researchers.map((researcher) => researcher.name.toLowerCase());
-      return (
-        paper.name.toLowerCase().includes(query) ||
-        paper.country.toLowerCase().includes(query) ||
-        authors.some((author) => author.includes(query)) ||
-        keywords.includes(query) ||
-        paper.tg.toLowerCase().includes(query) // Assuming "tg" is the topic group property
-      );
-    });
-
-    setFilteredPapers(filtered);
+    const { value } = event.target;
+    setSearchQuery(value);
+    filterPapers(value); // Call filterPapers to update the filteredPapers state
   };
+
+ // Function to filter research papers based on the search query
+const filterPapers = (query) => {
+  const filtered = researchPapers.filter((paper) => {
+    const keywordsMatch = paper.keywords.some((keywordId) => keywordId === query);
+    const tgMatch = paper.tg.includes(query);
+    const nameMatch = paper.name.toLowerCase().includes(query.toLowerCase());
+    const researchersMatch = paper.researchers.includes(parseInt(query, 10));
+
+    return (
+      keywordsMatch || tgMatch || nameMatch || researchersMatch || paper.abstract.toLowerCase().includes(query.toLowerCase())
+    );
+  });
+  setFilteredPapers(filtered);
+};
 
 
   const carouselStyle = {
@@ -45,7 +46,7 @@ const Home = () => {
     position: 'relative',
     backgroundColor: '#DFDEDE',
     marginBottom: '10vmin',
-    marginTop: '-2.5vmin', 
+    marginTop: '-2.5vmin',
   };
 
   const carouselItemStyle = {
@@ -70,12 +71,11 @@ const Home = () => {
     marginBottom: '10px',
   };
 
-  const paragraphStyle = {
-    fontSize: '18px',
-    lineHeight: '1.5',
-    marginBottom: '10px',
-    paddingLeft: '4rem',
-    paddingRight: '4rem',
+  const paperStyle = {
+    backgroundColor: '#DFDEDE',
+    padding: '20px',
+    margin: '10px',
+    boxShadow: '0 10px 10px black',
   };
 
   const readMoreButtonStyle = {
@@ -89,33 +89,54 @@ const Home = () => {
 
   return (
     <div className="container mt-4">
-     
+      <Carousel style={carouselStyle}>
+        {researchPapers.map((paper) => (
+          <Carousel.Item key={paper.id} style={carouselItemStyle}>
+            {paper.image ? (
+              <img className="d-block w-100" src={paper.image} alt={paper.name} />
+            ) : (
+              <div className="d-block w-100 placeholder" style={{ height: '400px' }}></div>
+            )}
+            <Carousel.Caption style={carouselCaptionStyle}>
+              <h3>{paper.name}</h3>
+              <p style={abstractStyle}>{paper.abstract}</p>
+              <a href={paper.url} target="_blank" rel="noreferrer" style={readMoreButtonStyle}>
+                Read More
+              </a>
+            </Carousel.Caption>
+          </Carousel.Item>
+        ))}
+      </Carousel>
 
-      {researchPapers.length === 0 ? (
-        <p>No research papers available.</p>
-      ) : (
-        <Carousel style={carouselStyle}>
-          {filteredPapers.map((paper) => (
-            <Carousel.Item key={paper.id} style={carouselItemStyle}>
-              {paper.image ? (
-                <img className="d-block w-100" src={paper.image} alt={paper.name} />
-              ) : (
-                <div className="d-block w-100 placeholder" style={{ height: '400px' }}></div>
-              )}
-              <Carousel.Caption style={carouselCaptionStyle}>
-                <h3>{paper.name}</h3>
-                <p style={abstractStyle}>{paper.abstract}</p>
-                <a href={paper.url} target="_blank" rel="noreferrer" style={readMoreButtonStyle}>
-                  Read More
-                </a>
-              </Carousel.Caption>
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      )}
+      <div className="mt-4">
+        <h1>Welcome to Lens Academia</h1>
+        <p>Explore our research papers and stay updated with the latest findings.</p>
 
-      <h1>Welcome to Lens Academia</h1>
-      <p style={paragraphStyle}>Explore our research papers and stay updated with the latest findings.</p>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={handleSearchChange}
+          placeholder="Search for research papers..."
+        />
+
+        {searchQuery.length > 0 ? (
+          <div className="mt-4">
+            {filteredPapers.length === 0 ? (
+              <p>No research papers available.</p>
+            ) : (
+              filteredPapers.map((paper) => (
+                <div key={paper.id} style={paperStyle}>
+                  <h3>{paper.name}</h3>
+                  <p style={abstractStyle}>{paper.abstract}</p>
+                  <a href={paper.url} target="_blank" rel="noreferrer" style={readMoreButtonStyle}>
+                    Read More
+                  </a>
+                </div>
+              ))
+            )}
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 };
