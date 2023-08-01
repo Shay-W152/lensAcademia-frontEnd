@@ -2,10 +2,10 @@
   font-family: 'Prata', serif;
     line-height: 1.5;
   font-weight: 400;
-
+  
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #DFDEDE;
+  background-color: #CDCBCB;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -13,16 +13,7 @@
   -webkit-text-size-adjust: 100%;
 }
 
-a {
-  font-weight: 500;
-  color: transparent;
-  text-decoration: inherit;
-  
-}
-a:hover {
-  color: #535bf2;
-  
-}
+ 
 
 
 
