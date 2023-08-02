@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Form, Button } from 'react-bootstrap';
 
 const PostResearchPaperForm = () => {
   const initialFormState = {
@@ -33,25 +34,53 @@ const PostResearchPaperForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="mb-3">
-        <label htmlFor="name" className="form-label">Name</label>
-        <input type="text" className="form-control" id="name" name="name" value={formData.name} onChange={handleChange} />
+    <Form onSubmit={handleSubmit} style={{ maxWidth: '500px', margin: '0 auto', marginTop:'2rem' }}>
+          <h1 style={{textDecoration:'underline'}}>Add a New paper</h1>
+
+      <Form.Group controlId="name">
+        <Form.Label>Name</Form.Label>
+        <Form.Control
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          style={{ marginBottom: '10px' }}
+        />
+      </Form.Group>
+      <Form.Group controlId="abstract">
+        <Form.Label>Abstract</Form.Label>
+        <Form.Control
+          as="textarea"
+          name="abstract"
+          value={formData.abstract}
+          onChange={handleChange}
+          style={{ marginBottom: '10px' }}
+        />
+      </Form.Group>
+      <Form.Group controlId="url">
+        <Form.Label>URL</Form.Label>
+        <Form.Control
+          type="text"
+          name="url"
+          value={formData.url}
+          onChange={handleChange}
+          style={{ marginBottom: '10px' }}
+        />
+      </Form.Group>
+      <Form.Group controlId="country">
+        <Form.Label>Country</Form.Label>
+        <Form.Control
+          type="text"
+          name="country"
+          value={formData.country}
+          onChange={handleChange}
+          style={{ marginBottom: '20px' }}
+        />
+      </Form.Group>
+      <div style={{ textAlign: 'center' }}>
+        <Button variant="primary" type="submit" style={{backgroundColor:'#A6A0A0', borderColor:'white'}}>Submit</Button>
       </div>
-      <div className="mb-3">
-        <label htmlFor="abstract" className="form-label">Abstract</label>
-        <textarea className="form-control" id="abstract" name="abstract" value={formData.abstract} onChange={handleChange} />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="url" className="form-label">URL</label>
-        <input type="text" className="form-control" id="url" name="url" value={formData.url} onChange={handleChange} />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="country" className="form-label">Country</label>
-        <input type="text" className="form-control" id="country" name="country" value={formData.country} onChange={handleChange} />
-      </div>
-      <button type="submit" className="btn btn-primary">Submit</button>
-    </form>
+    </Form>
   );
 };
 

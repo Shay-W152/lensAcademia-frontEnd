@@ -31,13 +31,13 @@ const ResearchPapers = () => {
 
   const tableRowStyle = {
     backgroundColor: '#A6A0A0',
-    color: '#1E1E3A',
+    color: 'black',
   };
 
   return (
     <Transitions2>
-      <div>
-        <h2 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '20px', color: '#CFCBC9' }}>
+      <div style={{ padding: '3vmin' }}>
+        <h2 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '20px', color: 'black' ,textDecoration:'underline'}}>
           Research Papers
         </h2>
         <Table striped bordered hover responsive style={{ marginBottom: '20px' }}>
@@ -46,7 +46,6 @@ const ResearchPapers = () => {
               <th style={tableHeaderStyle}>Title</th>
               <th style={tableHeaderStyle}>Abstract</th>
               <th style={tableHeaderStyle}>Country</th>
-              {/* <th>Keywords</th> */}
             </tr>
           </thead>
           <tbody>
@@ -67,13 +66,6 @@ const ResearchPapers = () => {
                     {paper.country}
                   </a>
                 </td>
-                {/* <td>
-                {paper.keywords.map((keyword) => (
-                  <span key={keyword.id} style={{ color: '#000000' }}>
-                    {keyword.word}, 
-                  </span>
-                ))}
-              </td> */}
               </tr>
             ))}
           </tbody>

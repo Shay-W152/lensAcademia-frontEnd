@@ -47,7 +47,7 @@ const TGs = () => {
   return (
     <div>
       <Transitions2>
-      <h2 style={{ textAlign: 'center', marginBottom: '1rem', marginTop:'2rem', color: '#CFCBC9' }}>Topic Groups</h2>
+      <h2 style={{ textAlign: 'center', marginBottom: '1rem', marginTop:'2rem', color: 'black',textDecoration:'underline' }}>Topic Groups</h2>
       <Table striped bordered hover style={tableStyle}>
         <thead>
           <tr>

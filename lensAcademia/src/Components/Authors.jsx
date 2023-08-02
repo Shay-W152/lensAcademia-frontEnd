@@ -34,32 +34,36 @@ const Authors = () => {
     color: '#1E1E3A',
   };
 
+  const tableContainerStyle = {
+    padding: '3vmin', 
+  };
+
   return (
-    <div>
+    <div style={tableContainerStyle}>
       <Transitions2>
-      <h2 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '20px', color: '#CFCBC9' }}>
-        Authors
-      </h2>
-      <Table striped bordered hover responsive style={{ marginBottom: '20px' }}>
-        <thead>
-          <tr>
-            <th style={tableHeaderStyle}>Name</th>
-            <th style={tableHeaderStyle}>Country</th>
-          </tr>
-        </thead>
-        <tbody>
-          {authors.map((author) => (
-            <tr key={author.id}>
-              <td style={{ ...tableRowStyle, ...clickableCellStyle }}>
-                <a href={author.url} target="_blank" rel="noopener noreferrer" style={linkStyle}>
-                  {author.name}
-                </a>
-              </td>
-              <td style={tableRowStyle}>{author.country}</td>
+        <h2 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '20px', color: 'black', textDecoration:'underline' }}>
+          Authors
+        </h2>
+        <Table striped bordered hover responsive style={{ marginBottom: '20px' }}>
+          <thead>
+            <tr>
+              <th style={tableHeaderStyle}>Name</th>
+              <th style={tableHeaderStyle}>Country</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {authors.map((author) => (
+              <tr key={author.id}>
+                <td style={{ ...tableRowStyle, ...clickableCellStyle }}>
+                  <a href={author.url} target="_blank" rel="noopener noreferrer" style={linkStyle}>
+                    {author.name}
+                  </a>
+                </td>
+                <td style={tableRowStyle}>{author.country}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
       </Transitions2>
     </div>
   );
