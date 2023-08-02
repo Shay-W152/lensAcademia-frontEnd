@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import '../App.css';
-
+import Transition from './Transition'
 const Home = () => {
   const [researchPapers, setResearchPapers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -47,10 +47,13 @@ const filterPapers = (query) => {
     backgroundColor: '#DFDEDE',
     marginBottom: '10vmin',
     marginTop: '-2.5vmin',
+    
   };
 
   const carouselItemStyle = {
     width: '100%',
+    backgroundColor: '#A6A0A0',
+       
   };
 
   const carouselCaptionStyle = {
@@ -59,7 +62,8 @@ const filterPapers = (query) => {
     backgroundColor: '#A6A0A0',
     padding: '100px',
     boxShadow: '0 10px 10px black',
-    marginBottom: '-3vmin',
+    marginBottom: '-2vmin',
+    
   };
 
   const abstractStyle = {
@@ -88,8 +92,9 @@ const filterPapers = (query) => {
   };
 
   return (
+    <Transition>
     <div className="container mt-4">
-      <Carousel style={carouselStyle}>
+      <Carousel interval={null} style={carouselStyle}>
         {researchPapers.map((paper) => (
           <Carousel.Item key={paper.id} style={carouselItemStyle}>
             {paper.image ? (
@@ -134,10 +139,14 @@ const filterPapers = (query) => {
                 </div>
               ))
             )}
+            
           </div>
         ) : null}
+        
       </div>
+      
     </div>
+    </Transition>
   );
 };
 
